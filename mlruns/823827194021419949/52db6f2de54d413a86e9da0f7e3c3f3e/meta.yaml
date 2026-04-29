@@ -1,0 +1,14 @@
+artifact_uri: file:///Users/akashjyothibabu/Downloads/ai-legal-doc-assistant-mlops%202/ai-legal-doc-assistant-main/mlruns/823827194021419949/52db6f2de54d413a86e9da0f7e3c3f3e/artifacts
+end_time: 1777491385531
+entry_point_name: ''
+experiment_id: '823827194021419949'
+lifecycle_stage: active
+run_id: 52db6f2de54d413a86e9da0f7e3c3f3e
+run_name: efficient-robin-930
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1777491373696
+status: 3
+tags: []
+user_id: akashjyothibabu

@@ -1,0 +1,20 @@
+artifact_path: file:///Users/akashjyothibabu/Downloads/ai-legal-doc-assistant-mlops%202/ai-legal-doc-assistant-main/mlruns/823827194021419949/models/m-171d82c212a64456b1c133d0b9a8049f/artifacts
+flavors:
+  keras:
+    data: data
+    keras_backend: tensorflow
+    keras_version: 3.10.0
+    save_exported_model: false
+  python_function:
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.keras
+    python_version: 3.9.6
+mlflow_version: 3.1.4
+model_id: m-171d82c212a64456b1c133d0b9a8049f
+model_size_bytes: 4017127
+model_uuid: m-171d82c212a64456b1c133d0b9a8049f
+prompts: null
+run_id: 76dea5e60b5e417192732b5a12164363
+utc_time_created: '2026-04-29 17:55:38.879798'

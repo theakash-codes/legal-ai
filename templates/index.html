@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AI Legal Document Assistant — Professional AI-powered legal analysis, risk detection, compliance checking, and smart lawyer recommendations.">
+    <title>LegalAI Pro — AI Legal Document Assistant</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css?v=4">
+</head>
+<body>
+<canvas id="particles-canvas"></canvas>
+
+<!-- ═══════ LOGIN PAGE ═══════ -->
+<div id="login-page" class="login-page">
+    <div class="login-card">
+        <div class="login-logo">
+            <div class="logo-icon-lg">⚖️</div>
+            <h1>Legal<span class="gold">AI</span> Pro</h1>
+            <p class="login-tagline">AI-Powered Legal Intelligence Platform</p>
+        </div>
+        <div id="login-section">
+            <div class="login-title"><h2>Welcome</h2><p>Sign in to access your legal workspace</p></div>
+            <form class="login-form" id="login-form" onsubmit="return false;">
+                <div class="input-group"><label for="login-email">Email</label><div class="input-wrapper"><span class="input-icon">✉</span><input type="email" id="login-email" placeholder="Enter your email" autocomplete="email"></div></div>
+                <div class="input-group"><label for="login-password">Password</label><div class="input-wrapper"><span class="input-icon">🔒</span><input type="password" id="login-password" placeholder="Enter your password" autocomplete="current-password"><button type="button" class="password-toggle" id="password-toggle">👁</button></div></div>
+                <button type="submit" class="btn-primary" id="login-btn">Sign In</button>
+            </form>
+            <p class="login-hint">New user? Enter any email & password to auto-create an account.</p>
+        </div>
+    </div>
+</div>
+
+<!-- ═══════ DASHBOARD ═══════ -->
+<div id="dashboard-page" class="dashboard-page hidden">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-logo">
+            <span class="sb-icon">⚖️</span>
+            <span class="sb-text">Legal<span class="gold">AI</span></span>
+        </div>
+        <nav class="sidebar-nav">
+            <button class="nav-item active" data-section="upload"><span class="ni-icon">📤</span><span class="ni-text">Upload</span></button>
+            <button class="nav-item" data-section="chat"><span class="ni-icon">💬</span><span class="ni-text">AI Chat</span></button>
+            <button class="nav-item" data-section="risk"><span class="ni-icon">⚠️</span><span class="ni-text">Risk Analysis</span></button>
+            <button class="nav-item" data-section="fraud"><span class="ni-icon">🔍</span><span class="ni-text">Fraud Detection</span></button>
+            <button class="nav-item" data-section="simplify"><span class="ni-icon">📖</span><span class="ni-text">Simplify</span></button>
+            <button class="nav-item" data-section="draft"><span class="ni-icon">📝</span><span class="ni-text">Draft Clause</span></button>
+            <button class="nav-item" data-section="compliance"><span class="ni-icon">✅</span><span class="ni-text">Compliance</span></button>
+            <button class="nav-item" data-section="compare"><span class="ni-icon">🔀</span><span class="ni-text">Compare</span></button>
+            <button class="nav-item" data-section="lawyers"><span class="ni-icon">👨‍⚖️</span><span class="ni-text">Lawyers</span></button>
+            <button class="nav-item" data-section="analytics"><span class="ni-icon">📊</span><span class="ni-text">Analytics</span></button>
+            <button class="nav-item" data-section="downloads"><span class="ni-icon">💾</span><span class="ni-text">Downloads</span></button>
+        </nav>
+        <div class="sidebar-footer">
+            <button class="nav-item" id="sidebar-voice-btn"><span class="ni-icon">🎤</span><span class="ni-text">Voice</span></button>
+            <button class="nav-item" id="sidebar-logout-btn"><span class="ni-icon">🚪</span><span class="ni-text">Logout</span></button>
+        </div>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="main-content" id="main-content">
+        <!-- TOP BAR -->
+        <header class="top-bar">
+            <button class="menu-toggle" id="menu-toggle">☰</button>
+            <div class="top-bar-title"><h2 id="section-title">Upload Document</h2></div>
+            <div class="top-bar-actions">
+                <div class="lang-toggle" id="lang-toggle">
+                    <button class="lang-btn active" data-lang="en">English</button>
+                </div>
+                <span class="user-badge" id="user-badge">U</span>
+                <span class="user-name" id="top-username">User</span>
+            </div>
+        </header>
+
+        <!-- ═══ SECTION: UPLOAD ═══ -->
+        <section class="section active" id="sec-upload">
+            <div class="upload-area">
+                <div class="drop-zone" id="drop-zone">
+                    <span class="drop-icon">📄</span>
+                    <p>Drag & drop your legal document here</p>
+                    <p class="file-types">PDF, DOCX, TXT supported</p>
+                    <button class="btn-outline" id="browse-btn">Browse Files</button>
+                </div>
+                <input type="file" id="file-input" accept=".pdf,.docx,.txt" style="display:none">
+                <div class="upload-progress hidden" id="upload-progress">
+                    <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
+                    <div class="progress-info"><span id="upload-filename">file.pdf</span><span id="upload-status"></span></div>
+                </div>
+            </div>
+            <!-- Document Summary Card -->
+            <div class="doc-summary-card hidden" id="doc-summary-card">
+                <div class="card-hdr"><span class="card-icon">📋</span><h3>Document Summary</h3><span class="summary-quality-badge" id="summary-quality-badge"></span></div>
+                <div class="card-body" id="doc-summary-body">
+                    <div class="summary-lines" id="summary-lines"></div>
+                    <div class="summary-conclusion" id="summary-conclusion"></div>
+                </div>
+            </div>
+            <!-- Document Preview -->
+            <div class="preview-panel" id="preview-panel">
+                <div class="panel-hdr"><h3>📄 Document Preview</h3><button class="btn-sm" id="translate-btn" style="margin-left:auto;margin-right:.5rem">🌐 Translate</button><span class="doc-type-badge" id="doc-type-badge">—</span></div>
+                <div class="reconstruction-notice hidden" id="reconstruction-notice"></div>
+                <div class="panel-body" id="preview-body">
+                    <div class="placeholder-msg"><span class="ph-icon">📃</span><p>Upload a document to preview</p></div>
+                </div>
+                <!-- AI Smart Translation Output -->
+                <div class="translate-output hidden" id="translate-output">
+                    <div class="card-hdr" style="padding:.75rem 1rem;border-bottom:1px solid rgba(212,168,83,.15)"><span class="card-icon">🌐</span><h3 id="translate-label">AI Smart Translation Output</h3></div>
+                    <div class="panel-body" id="translate-body" style="max-height:300px;overflow-y:auto;white-space:pre-wrap;font-size:.9rem;line-height:1.7;color:var(--text2)"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══ SECTION: CHAT ═══ -->
+        <section class="section" id="sec-chat">
+            <div class="chat-container">
+                <div class="chat-header"><h3>🤖 AI Legal Assistant</h3><span class="speaking-indicator" id="speaking-indicator"><span class="sbar"></span><span class="sbar"></span><span class="sbar"></span></span></div>
+                <div class="chat-messages" id="chat-messages">
+                    <div class="chat-bubble ai"><div class="bubble-label">AI Assistant</div><span>Hello! I'm your AI Legal Assistant. Upload a document and ask me anything about it — parties, clauses, dates, risks, or legal implications.</span></div>
+                </div>
+                <div class="chat-input-area">
+                    <input type="text" id="chat-input" placeholder="Ask about your document...">
+                    <button class="chat-voice-btn" id="chat-voice-btn" title="Voice">🎤</button>
+                    <button class="chat-send-btn" id="chat-send-btn" title="Send">➤</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══ SECTION: RISK ═══ -->
+        <section class="section" id="sec-risk">
+            <div class="section-grid two-col">
+                <div class="card">
+                    <div class="card-hdr"><span class="card-icon">⚠️</span><h3>Clause-by-Clause Risk Analysis</h3></div>
+                    <div class="card-body" id="risk-clauses-body">
+                        <div class="placeholder-msg"><p>Upload a document to analyze risks</p></div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-hdr"><span class="card-icon">📊</span><h3>Risk Score</h3></div>
+                    <div class="card-body risk-gauge-panel">
+                        <div class="gauge-wrap"><canvas id="risk-gauge-canvas" width="260" height="260"></canvas><div class="gauge-center" id="gauge-center"><span class="gauge-val">—</span><span class="gauge-sub">RISK</span></div></div>
+                        <div class="risk-stats" id="risk-stats">
+                            <div class="risk-stat high"><span class="rs-dot"></span><span>High: <b id="risk-high">0</b></span></div>
+                            <div class="risk-stat medium"><span class="rs-dot"></span><span>Medium: <b id="risk-medium">0</b></span></div>
+                            <div class="risk-stat safe"><span class="rs-dot"></span><span>Safe: <b id="risk-low">0</b></span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══ SECTION: FRAUD ═══ -->
+        <section class="section" id="sec-fraud">
+            <div class="section-grid two-col">
+                <div class="card">
+                    <div class="card-hdr"><span class="card-icon">🔍</span><h3>Fraud & Missing Field Alerts</h3></div>
+                    <div class="card-body" id="fraud-alerts-body">
+                        <div class="placeholder-msg"><p>Upload a document to detect fraud indicators</p></div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-hdr"><span class="card-icon">🎯</span><h3>Fraud Probability</h3></div>
+                    <div class="card-body fraud-score-panel">
+                        <div class="big-score" id="fraud-score-display"><span class="score-num">0</span><span class="score-pct">%</span></div>
+                        <p class="score-label">Fraud Probability Score</p>
+                        <div class="fraud-summary" id="fraud-summary"><span>Issues: <b id="fraud-issues">0</b> / <b id="fraud-total">0</b> checks</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══ SECTION: SIMPLIFY ═══ -->
+        <section class="section" id="sec-simplify">
+            <div class="card full-width">
+                <div class="card-hdr"><span class="card-icon">📖</span><h3>Legal Simplification</h3><button class="btn-sm" id="simplify-btn">Explain in Simple Language</button></div>
+                <div class="card-body" id="simplify-body">
+                    <div class="simplify-split" id="simplify-split">
+                        <div class="simplify-col"><h4>Original Legal Text</h4><div class="simplify-text" id="simplify-original"><p class="placeholder-msg">Upload a document first</p></div></div>
+                        <div class="simplify-divider"></div>
+                        <div class="simplify-col"><h4>Simple English Meaning</h4><div class="simplify-text" id="simplify-simple"><p class="placeholder-msg">Click "Explain" to simplify</p></div></div>
+                    </div>
+                    <div class="simplify-terms" id="simplify-terms"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══ SECTION: DRAFT ═══ -->
+        <section class="section" id="sec-draft">
+            <div class="section-grid two-col">
+                <div class="card">
+                    <div class="card-hdr"><span class="card-icon">📝</span><h3>Clause Generator</h3></div>
+                    <div class="card-body">
+                        <div class="form-group"><label>Document Type</label><select id="draft-type"><option value="">Select type...</option><option value="rental_agreement">Rental Agreement</option><option value="nda">Non-Disclosure Agreement</option><option value="sale_deed">Sale Deed</option><option value="affidavit">Affidavit</option><option value="legal_notice">Legal Notice</option><option value="employment_agreement">Employment Agreement</option></select></div>
+                        <div id="draft-fields"></div>
+                        <button class="btn-primary" id="draft-generate-btn">Generate Draft</button>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-hdr"><span class="card-icon">📋</span><h3>Generated Document</h3><button class="btn-sm hidden" id="draft-download-btn">Download PDF</button></div>
+                    <div class="card-body"><pre class="draft-output" id="draft-output">Select a document type and fill in the details to generate a legal clause.</pre></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══ SECTION: COMPLIANCE ═══ -->
+        <section class="section" id="sec-compliance">
+            <div class="section-grid two-col">
+                <div class="card">
+                    <div class="card-hdr"><span class="card-icon">✅</span><h3>Compliance Checklist</h3></div>
+                    <div class="card-body" id="compliance-list-body">
+                        <div class="placeholder-msg"><p>Upload a document to check compliance</p></div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-hdr"><span class="card-icon">🎯</span><h3>Compliance Score</h3></div>
+                    <div class="card-body compliance-score-panel">
+                        <div class="big-score compliance" id="compliance-score-display"><span class="score-num">0</span><span class="score-pct">%</span></div>
+                        <p class="score-label">Legal Compliance</p>
+                        <div class="compliance-summary"><span>Passed: <b id="compliance-passed">0</b> / <b id="compliance-total">0</b></span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══ SECTION: COMPARE ═══ -->
+        <section class="section" id="sec-compare">
+            <div class="card full-width">
+                <div class="card-hdr"><span class="card-icon">🔀</span><h3>Document Comparison</h3></div>
+                <div class="card-body">
+                    <div class="compare-upload-row">
+                        <div class="compare-drop" id="compare-drop-1"><span>📄</span><p>Original Document</p><input type="file" id="compare-file-1" accept=".pdf,.docx,.txt"></div>
+                        <span class="compare-vs">VS</span>
+                        <div class="compare-drop" id="compare-drop-2"><span>📄</span><p>Modified Document</p><input type="file" id="compare-file-2" accept=".pdf,.docx,.txt"></div>
+                        <button class="btn-primary" id="compare-btn">Compare</button>
+                    </div>
+                    <div class="compare-result hidden" id="compare-result">
+                        <div class="compare-stats" id="compare-stats"></div>
+                        <div class="compare-diff" id="compare-diff"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══ SECTION: LAWYERS ═══ -->
+        <section class="section" id="sec-lawyers">
+            <div class="card full-width">
+                <div class="card-hdr"><span class="card-icon">👨‍⚖️</span><h3>Recommended Lawyers</h3><span class="lawyer-specialty-badge" id="lawyer-specialty">—</span></div>
+                <div class="card-body">
+                    <div class="lawyers-grid" id="lawyers-grid">
+                        <div class="placeholder-msg"><p>Upload a document to get lawyer recommendations based on your case type</p></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══ SECTION: ANALYTICS ═══ -->
+        <section class="section" id="sec-analytics">
+            <div class="analytics-stats" id="analytics-stats">
+                <div class="stat-card"><div class="stat-icon">📄</div><div class="stat-info"><span class="stat-val" id="stat-doctype">—</span><span class="stat-label">Document Type</span></div></div>
+                <div class="stat-card risk-card"><div class="stat-icon">⚠️</div><div class="stat-info"><span class="stat-val" id="stat-risk">—</span><span class="stat-label">Risk Score</span></div></div>
+                <div class="stat-card fraud-card"><div class="stat-icon">🔍</div><div class="stat-info"><span class="stat-val" id="stat-fraud">—</span><span class="stat-label">Fraud Probability</span></div></div>
+                <div class="stat-card compliance-card"><div class="stat-icon">✅</div><div class="stat-info"><span class="stat-val" id="stat-compliance">—</span><span class="stat-label">Compliance</span></div></div>
+            </div>
+            <div class="section-grid two-col">
+                <div class="card"><div class="card-hdr"><span class="card-icon">📌</span><h3>Key Data Extracted</h3></div><div class="card-body" id="analytics-keydata"><div class="placeholder-msg"><p>Upload a document</p></div></div></div>
+                <div class="card"><div class="card-hdr"><span class="card-icon">📋</span><h3>Summary</h3></div><div class="card-body" id="analytics-summary"><div class="placeholder-msg"><p>Upload a document</p></div></div></div>
+            </div>
+        </section>
+
+        <!-- ═══ SECTION: DOWNLOADS ═══ -->
+        <section class="section" id="sec-downloads">
+            <div class="downloads-grid">
+                <div class="download-card" id="dl-summary"><span class="dl-icon">📄</span><h4>Summary Report</h4><p>Full analysis with summary & simplified text</p><button class="btn-outline" data-dl="summary">Download PDF</button></div>
+                <div class="download-card" id="dl-risk"><span class="dl-icon">⚠️</span><h4>Risk Report</h4><p>Clause-by-clause risk analysis</p><button class="btn-outline" data-dl="risk">Download PDF</button></div>
+                <div class="download-card" id="dl-compliance"><span class="dl-icon">✅</span><h4>Compliance Report</h4><p>Full compliance checklist results</p><button class="btn-outline" data-dl="compliance">Download PDF</button></div>
+                <div class="download-card" id="dl-simplified"><span class="dl-icon">📖</span><h4>Simplified Document</h4><p>Plain English version</p><button class="btn-outline" data-dl="simplified">Download PDF</button></div>
+            </div>
+        </section>
+    </main>
+</div>
+
+<!-- VOICE OVERLAY -->
+<div class="voice-overlay" id="voice-overlay">
+    <div class="voice-visualizer"><div class="voice-bar"></div><div class="voice-bar"></div><div class="voice-bar"></div><div class="voice-bar"></div><div class="voice-bar"></div><div class="voice-bar"></div><div class="voice-bar"></div></div>
+    <p class="voice-status" id="voice-status">Listening...</p>
+    <button class="voice-close-btn" id="voice-close-btn">Stop Listening</button>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="/static/js/script.js?v=4"></script>
+</body>
+</html>

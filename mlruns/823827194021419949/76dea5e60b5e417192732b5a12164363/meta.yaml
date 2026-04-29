@@ -1,0 +1,14 @@
+artifact_uri: file:///Users/akashjyothibabu/Downloads/ai-legal-doc-assistant-mlops%202/ai-legal-doc-assistant-main/mlruns/823827194021419949/76dea5e60b5e417192732b5a12164363/artifacts
+end_time: 1777485347157
+entry_point_name: ''
+experiment_id: '823827194021419949'
+lifecycle_stage: active
+run_id: 76dea5e60b5e417192732b5a12164363
+run_name: puzzled-horse-636
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1777485333944
+status: 3
+tags: []
+user_id: akashjyothibabu

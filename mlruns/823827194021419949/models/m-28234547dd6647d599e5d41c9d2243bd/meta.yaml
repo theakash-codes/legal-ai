@@ -1,0 +1,10 @@
+artifact_location: file:///Users/akashjyothibabu/Downloads/ai-legal-doc-assistant-mlops%202/ai-legal-doc-assistant-main/mlruns/823827194021419949/models/m-28234547dd6647d599e5d41c9d2243bd/artifacts
+creation_timestamp: 1777491378322
+experiment_id: '823827194021419949'
+last_updated_timestamp: 1777491385523
+model_id: m-28234547dd6647d599e5d41c9d2243bd
+model_type: null
+name: model
+source_run_id: 52db6f2de54d413a86e9da0f7e3c3f3e
+status: 2
+status_message: null
