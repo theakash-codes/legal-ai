@@ -1,54 +1,84 @@
-<<<<<<< HEAD
-# legal-ai
-LegalAI Pro is an intelligent legal document assistant that uses machine learning to summarize documents, detect risks, identify fraud patterns, and provide simplified legal insights through an interactive web interface
-=======
-# Django Backend for Provided Frontend
+# ⚖️ LegalAI Pro — AI Legal Document Assistant
 
-This project is a minimal Django REST backend to work with the static frontend you uploaded.
-It provides:
+LegalAI Pro is an intelligent legal document assistant that uses machine learning to summarize documents, detect risks, identify fraud patterns, and provide simplified legal insights through an interactive web interface.
 
-- Signup, Login, Logout endpoints using token authentication.
-- `/upload` endpoint (POST) to upload a file (text or PDF) and receive a simple summary.
-- `/generate` endpoint (POST) to generate a simple draft from text/summary.
-- `/api/documents/` (GET) to list uploaded documents.
+---
 
-## Quick setup (on your machine)
+## 🚀 Features
 
-1. Create a Python virtualenv and activate it:
-   ```bash
-   python -m venv venv
-   source venv/bin/activate   # macOS/Linux
-   venv\Scripts\activate    # Windows
-   ```
+- 📄 Document Upload (PDF, DOCX, TXT)
+- 🧠 AI Summary Generation
+- ⚠️ Risk Analysis
+- 🔍 Fraud Detection
+- ✅ Compliance Checking
+- 📖 Legal Simplification
+- 💬 AI Chat Assistant
+- 🌐 Translation
+- 🧑‍⚖️ Lawyer Recommendations
+- 📊 Analytics Dashboard
 
-2. Install requirements:
-   ```bash
-   pip install -r requirements.txt
-   ```
+---
 
-3. Run migrations and create a superuser (optional):
-   ```bash
-   python manage.py migrate
-   python manage.py createsuperuser
-   ```
+## 🧠 Machine Learning
 
-4. Run the server:
-   ```bash
-   python manage.py runserver
-   ```
+- LSTM-based model for legal text classification  
+- Tokenization and sequence modeling  
+- Integrated with Django backend for real-time predictions  
+- Supports MLOps pipeline  
 
-5. The frontend expects endpoints at:
-   - `http://127.0.0.1:8000/upload` for file uploads (POST form-data `file`, `target_lang`)
-   - `http://127.0.0.1:8000/generate` for draft generation (POST JSON `{'text': '...'}`)
-   - `http://127.0.0.1:8000/auth/signup` and `/auth/login` for auth (POST JSON `username`, `password`)
-   - `http://127.0.0.1:8000/api/documents/` to list uploaded documents
+---
 
-## Notes
+## 🤖 Machine Learning Models
 
-- This backend uses a very simple summarization function; replace it with an NLP model or API if needed.
-- Token authentication is used. After login/signup, the frontend should include the header:
-  `Authorization: Token <token>` for endpoints that require user identification.
-- CORS is enabled for all origins to simplify local development. Tighten this for production.
+This project uses deep learning for analyzing legal documents.
 
-Enjoy! 👩‍💻👨‍💻
->>>>>>> 03776e1 (Initial commit - Legal AI project)
+### 🔹 Model Used
+- LSTM (Long Short-Term Memory)
+- Built using TensorFlow / Keras
+
+### 🔹 Input Processing
+- Text cleaning
+- Tokenization
+- Padding sequences
+
+### 🔹 Output
+- Risk prediction / legal insights
+
+### 🔹 Model Files
+- `ml/models/model.keras`
+- `ml/tokenizer.pkl`
+
+### 🔹 Training Pipeline
+- Dataset → preprocessing → training → saved model
+
+### 🔹 MLOps Integration
+- `ml/train.py` → training pipeline
+- `ml/predict.py` → inference system
+
+---
+
+## 🛠️ Tech Stack
+
+### Backend
+- Django
+- Django REST Framework
+
+### Frontend
+- HTML, CSS, JavaScript
+
+### ML
+- TensorFlow / Keras
+
+### DevOps / MLOps
+- Docker
+- MLflow
+- GitHub
+
+---
+
+## ⚙️ Setup
+
+```bash
+pip install -r requirements.txt
+python ml/train.py
+python manage.py runserver
